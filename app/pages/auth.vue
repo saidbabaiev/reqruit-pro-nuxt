@@ -2,10 +2,16 @@
 const supabase = useSupabaseClient()
 const user = useSupabaseUser()
 const router = useRouter()
+const route = useRoute()
+
+// Capture the intended redirect path after login
+const redirectTo = computed(() => route.query.redirectTo as string || undefined)
 
 watchEffect(() => {
     if (user.value) {
-        router.push('/dashboard')
+        // If user is logged in, redirect to intended page or dashboard
+        const destination = redirectTo.value || '/dashboard'
+        router.push(destination)
     }
 })
 
@@ -29,7 +35,6 @@ const handleSignIn = async () => {
 
         if (error) throw error
 
-        router.push('/dashboard')
     } catch (error: any) {
         alert(error.message || 'Error signing in')
     } finally {
