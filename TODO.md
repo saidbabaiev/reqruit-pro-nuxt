@@ -12,6 +12,7 @@
 - [~] **Authentication Flow**
     - [x] Implement Login page (`/login`) with Supabase Auth.
     - [ ] Implement Register page.
+    - [x] Create main landing page (`/`) with basic marketing content.
     - [x] Create `middleware/auth.global.ts` to protect routes and handle redirects.
 - [ ] **Base UI Components**
     - [x] Install/Configure UI Library (Nuxt UI / Tailwind).

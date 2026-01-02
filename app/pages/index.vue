@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const user = useSupabaseUser()
+
 definePageMeta({
     layout: false,
 })
@@ -13,7 +15,14 @@ definePageMeta({
           <div class="w-8 h-8 bg-blue-600 rounded-lg"></div>
           <span class="text-2xl font-bold text-gray-900">HireCRM</span>
         </div>
-        <div class="flex gap-3">
+
+        <div v-if="user" class="flex items-center gap-3">
+          <span class="text-sm text-gray-600">{{ user.email }}</span>
+          <Button as-child>
+            <NuxtLink to="/dashboard">Dashboard</NuxtLink>
+          </Button>
+        </div>
+        <div v-else class="flex gap-3">
           <Button variant="outline" as-child>
             <NuxtLink to="/login">Sign In</NuxtLink>
           </Button>
@@ -34,7 +43,12 @@ definePageMeta({
         <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
           Manage candidates, track applications, and hire top tech talent faster with our modern recruitment CRM.
         </p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <div v-if="user" class="flex justify-center">
+          <Button size="lg" as-child>
+            <NuxtLink to="/dashboard">Go to Dashboard</NuxtLink>
+          </Button>
+        </div>
+        <div v-else class="flex flex-col sm:flex-row gap-4 justify-center">
           <Button size="lg" as-child>
             <NuxtLink to="/login">Start Free Trial</NuxtLink>
           </Button>
