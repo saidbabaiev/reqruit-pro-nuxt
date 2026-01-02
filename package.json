@@ -12,6 +12,7 @@
     "supabase:generate-types-local": "npx supabase gen types typescript --local > types/supabase.ts"
   },
   "dependencies": {
+    "@nuxtjs/supabase": "^2.0.3",
     "@supabase/supabase-js": "^2.89.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
