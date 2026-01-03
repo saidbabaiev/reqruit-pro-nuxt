@@ -30,6 +30,10 @@ defineProps<{
     }[]
   }[]
 }>()
+
+const isActiveRoute = (url: string) => {
+  return useRoute().path.startsWith(url)
+}
 </script>
 
 <template>
@@ -38,11 +42,13 @@ defineProps<{
     <SidebarMenu>
       <Collapsible v-for="item in items" :key="item.title" as-child :default-open="item.isActive">
         <SidebarMenuItem>
-          <SidebarMenuButton as-child :tooltip="item.title">
-            <a :href="item.url">
+          <SidebarMenuButton as-child :tooltip="item.title" :is-active="isActiveRoute(item.url)">
+            <NuxtLink 
+              :to="item.url"
+              >
               <component :is="item.icon" />
               <span>{{ item.title }}</span>
-            </a>
+            </NuxtLink>
           </SidebarMenuButton>
           <template v-if="item.items?.length">
             <CollapsibleTrigger as-child>

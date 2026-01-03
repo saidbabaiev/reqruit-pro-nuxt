@@ -29,6 +29,7 @@ import {
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   variant: "inset",
+  collapsible: "icon",
 })
 
 const user = useSupabaseUser()
@@ -47,7 +48,6 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: PieChart,
-      isActive: true
     },
     {
       title: "Candidates",
@@ -96,7 +96,7 @@ const data = {
 </script>
 
 <template>
-  <Sidebar v-bind="props">
+  <Sidebar v-bind="props" class="bg-card">
     <SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem>
