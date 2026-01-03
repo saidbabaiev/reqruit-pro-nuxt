@@ -1,0 +1,187 @@
+<script setup lang="ts">
+import { 
+  Plus, 
+  Mail, 
+  Phone, 
+  Briefcase, 
+  Calendar, 
+  Eye, 
+  Edit,
+  MoreVertical,
+  UserCheck,
+  FileText,
+  Trash,
+  Users
+} from 'lucide-vue-next'
+
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { 
+  Card, 
+  CardContent, 
+  CardDescription, 
+  CardFooter, 
+  CardHeader, 
+  CardTitle 
+} from '@/components/ui/card'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+</script>
+
+<template>
+  <div class="p-6 space-y-6">
+    <!-- Page Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight">Candidates</h1>
+        <p class="text-muted-foreground mt-1">Manage and track all your candidates</p>
+      </div>
+      <Button>
+        <Plus class="mr-2 h-4 w-4" />
+        Add Candidate
+      </Button>
+    </div>
+
+    <!-- Filters Section -->
+    <div class="flex flex-col sm:flex-row gap-4">
+      <div class="flex-1">
+        <Input 
+          type="search" 
+          placeholder="Search candidates by name, email, or skills..." 
+          class="w-full"
+        />
+      </div>
+      <Select>
+        <SelectTrigger class="w-full sm:w-[180px]">
+          <SelectValue placeholder="Status" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Statuses</SelectItem>
+          <SelectItem value="new">New</SelectItem>
+          <SelectItem value="screening">Screening</SelectItem>
+          <SelectItem value="interview">Interview</SelectItem>
+          <SelectItem value="offer">Offer</SelectItem>
+          <SelectItem value="hired">Hired</SelectItem>
+          <SelectItem value="rejected">Rejected</SelectItem>
+        </SelectContent>
+      </Select>
+      <Select>
+        <SelectTrigger class="w-full sm:w-[180px]">
+          <SelectValue placeholder="Position" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Positions</SelectItem>
+          <SelectItem value="frontend">Frontend Developer</SelectItem>
+          <SelectItem value="backend">Backend Developer</SelectItem>
+          <SelectItem value="fullstack">Full Stack Developer</SelectItem>
+          <SelectItem value="devops">DevOps Engineer</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+
+    <!-- Candidates Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+      <Card 
+        v-for="n in 9" 
+        :key="n"
+        class="overflow-hidden hover:shadow-lg transition-shadow duration-200"
+      >
+        <CardHeader class="pb-3">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <Avatar class="h-12 w-12 shrink-0">
+                <AvatarImage src="" alt="John Doe" />
+                <AvatarFallback class="bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
+                  JD
+                </AvatarFallback>
+              </Avatar>
+              <div class="min-w-0 flex-1">
+                <CardTitle class="text-base leading-none mb-1.5 truncate">
+                  John Doe
+                </CardTitle>
+                <CardDescription class="text-sm truncate">
+                  Senior Frontend Developer
+                </CardDescription>
+              </div>
+            </div>
+            <Badge variant="outline" class="shrink-0 text-xs">
+              New
+            </Badge>
+          </div>
+        </CardHeader>
+        
+        <CardContent class="space-y-2.5 pb-4">
+          <div class="flex items-center gap-2 text-sm">
+            <Mail class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <span class="text-muted-foreground truncate text-xs">john.doe@example.com</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <Phone class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <span class="text-muted-foreground text-xs">+1 (555) 123-4567</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <Briefcase class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <span class="text-muted-foreground text-xs">5+ years experience</span>
+          </div>
+          <div class="flex items-center gap-2 text-sm">
+            <Calendar class="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+            <span class="text-muted-foreground text-xs">Applied 2 days ago</span>
+          </div>
+
+          <div class="flex flex-wrap gap-1.5 pt-2">
+            <Badge variant="secondary" class="text-xs px-2 py-0.5">React</Badge>
+            <Badge variant="secondary" class="text-xs px-2 py-0.5">TypeScript</Badge>
+            <Badge variant="secondary" class="text-xs px-2 py-0.5">Node.js</Badge>
+          </div>
+        </CardContent>
+        
+        <CardFooter class="flex gap-2 pt-3 border-t">
+          <Button variant="outline" class="flex-1" size="sm">
+            <Eye class="mr-1.5 h-3.5 w-3.5" />
+            <span class="text-xs">View</span>
+          </Button>
+          <Button variant="outline" class="flex-1" size="sm">
+            <Edit class="mr-1.5 h-3.5 w-3.5" />
+            <span class="text-xs">Edit</span>
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger as-child>
+              <Button variant="ghost" size="icon" class="h-8 w-8 shrink-0">
+                <MoreVertical class="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <UserCheck class="mr-2 h-4 w-4" />
+                <span>Schedule Interview</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <FileText class="mr-2 h-4 w-4" />
+                <span>View Resume</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem class="text-destructive">
+                <Trash class="mr-2 h-4 w-4" />
+                <span>Delete</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </CardFooter>
+      </Card>
+    </div>
+  </div>
+</template>
